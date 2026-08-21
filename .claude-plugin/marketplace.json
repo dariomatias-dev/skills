@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "dariomatias-dev",
+  "description": "Production-grade Agent Skills for Claude Code, organized by technology.",
+  "owner": {
+    "name": "Dário Matias",
+    "url": "https://github.com/dariomatias-dev"
+  },
+  "plugins": [
+    {
+      "name": "flutter",
+      "description": "Flutter development skills: feature-first architecture, MVVM, Riverpod, typed navigation, design system, data layer, testing, i18n and project tooling.",
+      "source": "./flutter",
+      "category": "development"
+    }
+  ]
+}

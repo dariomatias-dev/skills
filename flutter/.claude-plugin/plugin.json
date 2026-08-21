@@ -1,0 +1,22 @@
+{
+  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
+  "name": "flutter",
+  "version": "1.0.0",
+  "description": "Flutter development skills: feature-first architecture, MVVM over simplified Clean Architecture, Riverpod state management, typed navigation with go_router, a packaged design system, data layer, testing strategy, internationalization and project tooling.",
+  "author": {
+    "name": "Dário Matias",
+    "url": "https://github.com/dariomatias-dev"
+  },
+  "homepage": "https://github.com/dariomatias-dev/skills",
+  "license": "MIT",
+  "keywords": [
+    "flutter",
+    "dart",
+    "architecture",
+    "riverpod",
+    "testing"
+  ],
+  "skills": [
+    "./"
+  ]
+}
