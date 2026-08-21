@@ -1,6 +1,6 @@
 <br>
 <div align="center">
-<img src="https://img.shields.io/badge/Agent%20Skills-10-informational?style=for-the-badge" alt="Agent Skills">
+<img src="https://img.shields.io/badge/Agent%20Skills-20-informational?style=for-the-badge" alt="Agent Skills">
 <img src="https://img.shields.io/badge/Claude%20Code-compat%C3%ADvel-D97757?style=for-the-badge&logo=anthropic&logoColor=white" alt="Claude Code">
 <img src="https://img.shields.io/badge/Flutter-coberto-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Flutter">
 <img src="https://img.shields.io/badge/Licen%C3%A7a-MIT-yellow?style=for-the-badge" alt="Licença: MIT">
@@ -56,11 +56,28 @@ Estrutura feature-first, MVVM sobre Clean Architecture simplificada, Riverpod, r
 | [flutter-state-riverpod](flutter/flutter-state-riverpod/) | ViewModels, providers, ciclo de vida |
 | [flutter-navigation](flutter/flutter-navigation/) | go_router, rotas tipadas, navigators |
 | [flutter-design-system](flutter/flutter-design-system/) | Pacote de UI, tokens, componentes |
-| [flutter-data-layer](flutter/flutter-data-layer/) | Repositórios, banco, migrações |
+| [flutter-layout-insets](flutter/flutter-layout-insets/) | Safe areas, barras do sistema, teclado |
+| [flutter-animation](flutter/flutter-animation/) | Controllers, rebuilds, desempenho de motion |
+| [flutter-data-layer](flutter/flutter-data-layer/) | Repositórios, escolha de storage, erros |
+| [flutter-database](flutter/flutter-database/) | Schema, índices, transações, migrações |
+| [flutter-networking](flutter/flutter-networking/) | Contrato HTTP, retry, refresh de token |
+| [flutter-error-handling](flutter/flutter-error-handling/) | Fronteiras de erro, log, reporte |
+| [flutter-forms](flutter/flutter-forms/) | Controllers, validação, submissão |
+| [flutter-responsive-layout](flutter/flutter-responsive-layout/) | Breakpoints, estrutura adaptativa |
 | [flutter-testing](flutter/flutter-testing/) | Unitário, widget, golden, integração |
 | [flutter-i18n](flutter/flutter-i18n/) | Arquivos ARB, plurais, troca de idioma |
 | [flutter-project-setup](flutter/flutter-project-setup/) | Ferramental, lints, codegen, CI/CD |
+| [flutter-seed-data](flutter/flutter-seed-data/) | Dados de desenvolvimento, guarda de release |
+| [flutter-screenshots](flutter/flutter-screenshots/) | Captura dirigida para listagens |
 | [flutter-release-notes](flutter/flutter-release-notes/) | Texto de listagem na loja para um release |
+
+### Markdown
+
+Convenções de documento que valem para qualquer repositório, independentemente da tecnologia. Índice completo em [markdown/README.md](markdown/README.md).
+
+| Skill | Cobre |
+| --- | --- |
+| [markdown-readme](markdown/markdown-readme/) | Estrutura de readme, badges, versões traduzidas |
 
 Outras tecnologias serão adicionadas como pastas separadas na raiz.
 
@@ -80,6 +97,9 @@ Outras tecnologias serão adicionadas como pastas separadas na raiz.
 │   │   ├── SKILL.md
 │   │   └── references/              # detalhe profundo, carregado sob demanda
 │   └── ...
+├── markdown/
+│   ├── .claude-plugin/
+│   └── markdown-readme/
 ├── CONTRIBUTING.md
 ├── LICENSE
 └── README.md
@@ -98,7 +118,7 @@ claude plugin marketplace add dariomatias-dev/skills
 claude plugin install flutter@dariomatias-dev
 ```
 
-Reinicie o Claude Code. As dez skills são carregadas automaticamente e aparecem sob o namespace do plugin, como em `flutter:flutter-architecture`.
+Reinicie o Claude Code. As dezenove skills são carregadas automaticamente e aparecem sob o namespace do plugin, como em `flutter:flutter-architecture`.
 
 | Tarefa | Comando |
 | --- | --- |
