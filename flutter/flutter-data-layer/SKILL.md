@@ -34,8 +34,28 @@ If a model is a field-for-field copy of an entity, delete it and persist the ent
 | Small scalar preferences, flags, last-session pointers | key-value storage |
 | Collections, relations, anything queried, sorted or joined | local relational database |
 | Large binaries (images, audio, exports) | filesystem, with the path referenced in the database |
+| Credentials, tokens, encryption keys | platform secure storage, never plain key-value |
 
 Never store a collection in key-value storage, and never store a blob in the database.
+
+## Secrets
+
+Plain key-value preferences are not encrypted. On Android they are a world-readable-by-root XML file, and on a rooted or backed-up device their contents are recoverable. A session token written there is a credential leak waiting for the right device.
+
+Secrets go through the platform keystore, behind their own contract so the storage mechanism stays swappable and fakeable:
+
+```dart
+abstract interface class SecureStorage {
+  Future<String?> read(String key);
+  Future<void> write(String key, String value);
+  Future<void> delete(String key);
+}
+```
+
+- Keep secrets out of the local database as well; encrypting the database is a separate decision and does not make it the right home for a token.
+- Sign-out clears every secret, not only the access token. A refresh token that survives sign-out re-authenticates the previous user.
+- Secure storage can fail or return null after an OS restore, a keystore reset or a biometric change. Treat that as a signed-out session, not as a crash.
+- API keys compiled into the app are readable by anyone who unpacks it. Inject them at build time to keep them out of source control, and treat any key that must stay secret as a server responsibility.
 
 ## Key-value storage
 
@@ -55,23 +75,9 @@ abstract interface class KeyValueStorage {
 - Keys live in one constants file, never inlined at call sites.
 - The contract exposes only the operations the project actually uses.
 
-## Local database (Drift)
+## Local database
 
-```text
-core/database/
-├── app_database.dart
-├── tables/
-├── daos/
-└── database_providers.dart
-```
-
-- Features never write SQL; they call DAOs through repositories.
-- One DAO per aggregate, not one per screen.
-- Index the columns you filter and sort by; add foreign keys with the right cascade behavior.
-- Use transactions for multi-table writes, and batch inserts for bulk indexing.
-- Expose `watch*` queries for reactive UI instead of manual polling.
-
-**Migrations are mandatory.** Every schema change after the first release ships a `MigrationStrategy`/`onUpgrade` step that adds or alters only what changed and preserves existing data. Bumping `schemaVersion` without a matching migration fails silently for users with the old database installed. Test each migration path with the generated schema fixtures.
+Schema design, indexes, transactions, reactive queries and migrations are covered by `flutter-database`. From the data layer's side the rule is simply that features never write SQL: they call repositories, which call DAOs.
 
 ## Identifiers
 
