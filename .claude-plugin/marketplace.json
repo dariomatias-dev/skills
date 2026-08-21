@@ -12,6 +12,12 @@
       "description": "Flutter development skills: feature-first architecture, MVVM, Riverpod, typed navigation, design system, data layer, testing, i18n and project tooling.",
       "source": "./flutter",
       "category": "development"
+    },
+    {
+      "name": "markdown",
+      "description": "Markdown document skills: repository readme structure, multi-language documentation, badges and section conventions.",
+      "source": "./markdown",
+      "category": "development"
     }
   ]
 }
