@@ -173,4 +173,4 @@ Store signing material in repository secrets, never in the repo. Publishing to a
 
 Development helpers live in `scripts/`. Anything a developer runs more than twice belongs there, documented in the README.
 
-For screenshot automation, drive the app through a single integration-test target that covers every locale as its own test case, seeding data in memory: one install, many locales, instead of one install per locale.
+Two helpers most projects end up needing: populating a local database for development, covered by `flutter-seed-data`, and capturing store and README images, covered by `flutter-screenshots`.
