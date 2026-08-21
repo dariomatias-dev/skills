@@ -118,6 +118,30 @@ Re-run code generation after adding, removing or changing the signature of any a
 
 How ViewModels and providers are tested, including container setup and fakes: `flutter-testing`.
 
+## App lifecycle
+
+Backgrounding and resuming are state changes like any other, and belong in a provider rather than scattered across widgets.
+
+```dart
+@riverpod
+class AppLifecycle extends _$AppLifecycle {
+  @override
+  AppLifecycleState build() {
+    final listener = AppLifecycleListener(
+      onStateChange: (value) => state = value,
+    );
+    ref.onDispose(listener.dispose);
+    return AppLifecycleState.resumed;
+  }
+}
+```
+
+- One listener for the whole app. A `WidgetsBindingObserver` per screen means several components reacting to the same event in an undefined order.
+- `paused` is the last reliable point to persist. On both platforms the process can be killed afterwards without further notice, so work deferred to `detached` may never run.
+- Resuming is not a reason to refetch everything. Refresh what can be stale and is visible; a blanket invalidation on every resume turns app switching into a loading screen.
+- Timers, polling and streams that cost battery stop on `paused` and restart on `resumed`.
+- Sensitive screens that must hide their content in the task switcher react to `inactive`, which fires before `paused`.
+
 ## Anti-patterns
 
 - One global file holding every provider in the project.

@@ -54,6 +54,16 @@ core/
 └── widgets/        # structural widgets that depend on state management
 ```
 
+The permission wrapper is worth spelling out, because a boolean is not enough. The contract must distinguish three outcomes, since each leads to a different flow:
+
+| Outcome | What the app can do |
+| --- | --- |
+| Granted | Proceed |
+| Denied | Ask again, after explaining why the permission is needed |
+| Permanently denied | Asking again is a no-op; the only path is opening system settings |
+
+An app that treats permanent denial as a normal denial shows a request dialog that never appears, leaving the user pressing a button that does nothing. Ask at the moment the feature needs the permission, not on startup, and keep the app usable in a reduced form when the answer is no.
+
 Rules:
 
 - Create a folder only when it has real content.

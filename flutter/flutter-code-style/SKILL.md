@@ -59,7 +59,7 @@ Delete comments that restate the code, commented-out code, and `TODO`s with no o
 ## Async
 
 - Use `async`/`await` over raw `Future` chains.
-- Never swallow an exception; convert it to a typed app exception at the boundary.
+- Never swallow an exception. Catch it where it can be handled, and let it travel typed rather than as a null return.
 - Check `mounted` (widget) or `ref.mounted` (auto-dispose notifier) after an `await` before using context or assigning state.
 - Cancel subscriptions and timers in `dispose`/`onDispose`.
 

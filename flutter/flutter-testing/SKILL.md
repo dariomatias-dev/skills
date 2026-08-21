@@ -102,4 +102,43 @@ Mirror the `lib/` structure; name files `<source>_test.dart`.
 - No `Future.delayed` to "wait" for something. Use `fakeAsync`, controllers or pumped frames.
 - Each test is independent and deterministic; inject clocks and id generators instead of using real time and random values.
 - Always `addTearDown` for subscriptions and databases; containers get it from `ProviderContainer.test()`.
-- A flaky test is a broken test: fix or delete it.
+
+## Stability
+
+A flaky test is a broken test. It is worse than a missing test, because a suite that fails at random trains the team to rerun the job instead of reading the failure, and a real regression then passes unnoticed among the reruns.
+
+Flakiness is almost never random. It is a hidden dependency on something the test does not control.
+
+| Source | Symptom | Fix |
+| --- | --- | --- |
+| Real clock | Passes locally, fails on a slow CI machine | Inject a clock; drive time with `fakeAsync` |
+| Real randomness | Fails once every few hundred runs | Inject the generator, or seed it explicitly |
+| Test order | Passes alone, fails in the suite | Move shared setup into `setUp`, never mutable state in `setUpAll` |
+| Leaked state | Failure appears in the test after the culprit | `addTearDown` for every subscription, container, database and override |
+| Unordered collections | Fails on a different platform or SDK | Sort before comparing, or compare as sets |
+| Unawaited futures | Assertion runs before the work completes | Await everything, and fail the test on unawaited errors |
+| Animations | `pumpAndSettle` times out | Advance a fixed number of frames instead |
+| Fonts not loaded | Golden diffs only in CI | Load fonts explicitly in the test setup |
+| Ambient locale or timezone | Formatting assertions differ per machine | Pin both in the test |
+
+## Diagnosing a flaky test
+
+1. Reproduce before fixing. A test that fails once in fifty runs is not fixed by a change that has not been run fifty times.
+
+   ```bash
+   for i in $(seq 1 50); do flutter test test/path/to/file_test.dart || break; done
+   ```
+
+2. Check order dependence by randomizing:
+
+   ```bash
+   flutter test --test-randomize-ordering-seed random
+   ```
+
+   A suite that only passes in declaration order has shared state. Record the failing seed and reuse it to reproduce.
+
+3. Isolate: run the single test alone. Passing alone and failing in the suite confirms leakage rather than a bug in the test itself.
+
+4. Fix the dependency, not the symptom. Adding a delay, a retry or a longer timeout hides the leak and it returns later in a different test.
+
+Never mark a test as skipped to unblock a merge without an issue recording why. A skipped test is invisible; an untracked skipped test is permanent.

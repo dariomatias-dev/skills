@@ -119,6 +119,17 @@ Keep reusable transitions in `route_transitions.dart`; a screen that opens from 
 
 Keep it only for the rare cases that need a raw path outside the normal flow: redirect tests, minimal routers built inside widget tests. Production navigation always goes through typed route classes.
 
+## Deep links
+
+A deep link enters the app at an arbitrary route, so every assumption that a screen was reached from somewhere else breaks.
+
+- The typed route classes already parse the incoming path; the work is platform configuration and what happens when the destination is not reachable.
+- Both platforms need verified association files to open links without a chooser: `assetlinks.json` for Android App Links and the Apple App Site Association file for Universal Links. Without verification the link opens in the browser, which usually looks like the deep link is broken.
+- A link to a guarded route must survive the guard. Store the intended destination, run the guard, then continue to it rather than dropping the user on a default screen after sign-in.
+- The back stack from a cold-start deep link is whatever you build. Landing on a detail screen with no way back to a list is a common result of ignoring this; give the route an explicit parent.
+- A link to content that does not exist, or that the user may not see, resolves to a real not-found or forbidden state, never a blank screen.
+- Verify both entry paths: cold start with the app closed, and an incoming link while the app is already running.
+
 ## Anti-patterns
 
 - `Navigator.push(MaterialPageRoute(...))` in a feature.
