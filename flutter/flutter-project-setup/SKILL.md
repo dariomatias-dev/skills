@@ -1,6 +1,6 @@
 ---
 name: flutter-project-setup
-description: Bootstrapping and tooling for Flutter projects: SDK pinning, dependencies, analysis options, code generation, assets, CI/CD workflows and release artifacts. Use when starting a project, adding a local package, configuring lints or build_runner, or writing GitHub Actions pipelines for a Flutter app.
+description: Bootstrapping and tooling for Flutter projects: SDK pinning, dependencies, dependency-update automation, analysis options, code generation and assets. Use when starting a project, adding a local package, configuring lints or build_runner, or setting up Dependabot. Pipeline jobs and CI checks are covered by flutter-ci.
 license: MIT
 ---
 
@@ -42,6 +42,28 @@ Never add a dependency for something the SDK already does well, and remove anyth
 
 Codegen packages can pin conflicting `analyzer` version ranges against each other (a database generator and a router generator are a common pair to clash). When `pub get` refuses to resolve, follow the version `pub` itself suggests instead of guessing an older pin; it already computed the range every package in the project actually allows.
 
+## Dependency updates
+
+```yaml
+# .github/dependabot.yml
+version: 2
+updates:
+  - package-ecosystem: "pub"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "pub"
+    directory: "/packages/app_ui"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+```
+
+Dependabot is configuration, not a pipeline job: it opens pull requests, it does not run checks or gate a merge. One entry per `pubspec.yaml` in the project (root and every local package), plus one for the workflow files themselves. The gate that decides whether an update PR is safe to merge is the normal CI run, covered by `flutter-ci`.
+
 ## Local packages
 
 The design system (and any other reusable module) is a local package under `packages/`, wired as a path dependency:
@@ -73,6 +95,20 @@ The `**/*.g.dart` glob is what covers generators that emit no `ignore_for_file` 
 
 Keep the package's options file consistent with the app's.
 
+A strict lint set will disagree with decisions the project made deliberately, and the fix is to disable the rule once with the reason recorded, not to bend the code:
+
+```yaml
+linter:
+  rules:
+    # Single-method contracts exist so tests can substitute the platform
+    # implementation. They are deliberate, not accidental abstractions.
+    one_member_abstracts: false
+```
+
+That specific rule is worth knowing about before it fires: `very_good_analysis` flags an abstract class with one member, which is exactly the shape of the platform contracts a testable app needs. Deleting the contract to satisfy the lint removes the seam the tests depend on.
+
+Treat every disabled rule the same way. An `analysis_options.yaml` with silent exclusions is a file nobody can audit later.
+
 ## Code generation
 
 ```bash
@@ -100,9 +136,13 @@ LICENSE
 README.md          # base language, with a language switcher at the top
 README.<locale>.md # one per supported language
 CHANGELOG.md
+docs/
+├── architecture.md
+├── contributing.md
+└── security.md
 ```
 
-Pick a license explicitly (MIT is a reasonable default for open projects) and keep the changelog updated per release.
+Pick a license explicitly (MIT is a reasonable default for open projects) and keep the changelog updated per release. Readme structure is covered by `markdown-readme`; the architecture document by `markdown-architecture-doc`; contributing and security by `markdown-community-health`.
 
 ## Entry point
 
@@ -126,51 +166,10 @@ The root widget wires theme, router and localization, nothing else.
 
 ## Continuous integration
 
-Run on pull requests and pushes to main branches:
-
-```yaml
-name: ci
-on:
-  pull_request:
-  push:
-    branches: [main]
-
-jobs:
-  verify:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version-file: pubspec.yaml
-          cache: true
-      - run: flutter pub get
-      - run: flutter pub get --directory packages/app_ui
-      - run: dart format --set-exit-if-changed .
-      - run: dart run build_runner build --delete-conflicting-outputs
-      - run: flutter analyze
-      - run: flutter test
-      - run: flutter test
-        working-directory: packages/app_ui
-      - run: flutter build apk --debug
-```
-
-Every step is a gate: formatting, generation, analysis of app and packages, tests including goldens, and a build that proves the project still compiles.
-
-`--directory` is a `pub` option, so `flutter pub get --directory <path>` is valid while `flutter test --directory <path>` fails with `Could not find an option named "--directory"`. Run a package's tests through `working-directory` instead.
-
-## Continuous delivery
-
-Triggered by version tags (`v1.2.0`):
-
-- build the release artifact;
-- name it with the version;
-- attach it to the workflow run and to a GitHub release.
-
-Store signing material in repository secrets, never in the repo. Publishing to a store is a separate, deliberate workflow, never automatic from a tag unless the project explicitly wants that.
+The pipeline, the local command that must run the same checks, the generation and coverage gates, and tag-triggered releases are covered by `flutter-ci`.
 
 ## Scripts
 
 Development helpers live in `scripts/`. Anything a developer runs more than twice belongs there, documented in the README.
 
-Two helpers most projects end up needing: populating a local database for development, covered by `flutter-seed-data`, and capturing store and README images, covered by `flutter-screenshots`.
+Three helpers most projects end up needing: the verification gate, covered by `flutter-ci`, populating a local database for development, covered by `flutter-seed-data`, and capturing store and README images, covered by `flutter-screenshots`.
