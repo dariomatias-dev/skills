@@ -1,6 +1,6 @@
 ---
 name: markdown-readme
-description: Structure a repository readme that reads as a product page: header block, section order, badges, installation, multi-language versions and the boundary with CONTRIBUTING. Use when writing or reviewing a README, adding a translated version, or deciding which section a piece of documentation belongs in.
+description: Structure a repository readme that reads as a product page: header block, section order, badges, installation, multi-language versions and the boundary with the other documents a project carries. Use when writing or reviewing a README, adding a translated version, or deciding which document a piece of documentation belongs in.
 license: MIT
 ---
 
@@ -63,16 +63,50 @@ Delete sections that do not apply rather than filling them. An empty Screenshots
 - Keep the section structure identical across versions. A translation that drifts structurally becomes impossible to review.
 - A stale translation is worse than a missing one: it states things that are no longer true with the same confidence.
 
+## Documents beyond the readme
+
+Once a project carries more than a readme, the rest belong in `docs/`, translated the same way:
+
+```text
+README.md              README.es.md              README.pt-BR.md
+docs/
+├── architecture.md    architecture.es.md        architecture.pt-BR.md
+├── contributing.md    contributing.es.md        contributing.pt-BR.md
+├── dependencies.md    dependencies.es.md        dependencies.pt-BR.md
+└── security.md        security.es.md            security.pt-BR.md
+```
+
+The readme stays the entry point and links into them. Moving a document into `docs/` is what keeps the readme readable as the project grows. What belongs inside the architecture document is covered by `markdown-architecture-doc`; what belongs inside contributing and security is covered by `markdown-community-health`. This skill only covers the readme itself and where a document lives.
+
+## Keeping documentation true
+
+Documentation rots because updating it is treated as a separate task. Make it part of the change that invalidated it, and state explicitly what invalidates what:
+
+| Change | Update |
+| --- | --- |
+| A user-visible capability | Readme, every language |
+| A structural convention or layer boundary | The architecture document |
+| The workflow, checks or tooling | The contributing document |
+| A dependency added, removed or pinned | The dependency document, and the reason for the pin |
+| A script's name or behavior | The readme's script table |
+| A number the readme quotes, such as a threshold | The readme |
+
+A document updated in one language and not the others is a broken change, not a partial one. The stale versions keep asserting the old behavior with full confidence, and the readers who need them least are the ones reading the language you updated.
+
+Prefer documenting a fact in one place and linking to it. A number repeated in the readme, the contributing guide and a workflow file will be wrong in at least one of them within two releases.
+
 ## Boundaries with other files
 
 | Content | File |
 | --- | --- |
 | How to use the project | README |
-| How to work on the project | CONTRIBUTING |
+| How to set up and submit a change | CONTRIBUTING |
+| How to report a vulnerability | SECURITY |
+| Where a file belongs, why a layer exists | An architecture document |
 | What changed per version | CHANGELOG |
 | Legal terms | LICENSE |
 
-The readme links to each; it does not restate them. Setup instructions duplicated in both README and CONTRIBUTING drift within two releases.
+The readme links to each; it does not restate them. Setup instructions duplicated in both README and CONTRIBUTING drift within two releases. CONTRIBUTING and SECURITY follow `markdown-community-health`; an architecture document follows `markdown-architecture-doc`.
 
 ## Writing
 
