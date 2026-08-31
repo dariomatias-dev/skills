@@ -21,20 +21,22 @@ They are project-agnostic: no app-specific names, entities or domains.
 | [flutter-responsive-layout](flutter-responsive-layout/) | Breakpoints, adaptive structure, text scaling, pointer input |
 | [flutter-testing](flutter-testing/) | Unit, widget, golden and integration tests, fakes and overrides |
 | [flutter-i18n](flutter-i18n/) | ARB files, plurals, formatting, locale switching |
-| [flutter-project-setup](flutter-project-setup/) | SDK pinning, lints, codegen, assets, CI/CD, release artifacts |
+| [flutter-project-setup](flutter-project-setup/) | SDK pinning, lints, codegen, assets, repository files |
+| [flutter-ci](flutter-ci/) | Pipeline jobs, local gate, generation and coverage gates, releases |
 | [flutter-seed-data](flutter-seed-data/) | Development data, release guard, idempotency, standalone runs |
 | [flutter-screenshots](flutter-screenshots/) | Driven capture for README and store listings |
 | [flutter-release-notes](flutter-release-notes/) | Store listing text for a release, per-language budget, what to omit |
 
 ## Reading order for a new project
 
-1. `flutter-project-setup`: scaffold, tooling, CI.
-2. `flutter-architecture`: structure and layer rules.
-3. `flutter-design-system`: UI package and tokens.
-4. `flutter-state-riverpod` + `flutter-navigation`: app wiring.
-5. `flutter-data-layer`: persistence.
-6. `flutter-i18n` and `flutter-testing`: applied continuously, not at the end.
-7. `flutter-release-notes`: when a build is ready to publish.
+1. `flutter-project-setup`: scaffold and tooling.
+2. `flutter-ci`: pipeline and the local gate that must agree with it.
+3. `flutter-architecture`: structure and layer rules.
+4. `flutter-design-system`: UI package and tokens.
+5. `flutter-state-riverpod` + `flutter-navigation`: app wiring.
+6. `flutter-data-layer`: persistence.
+7. `flutter-i18n` and `flutter-testing`: applied continuously, not at the end.
+8. `flutter-release-notes`: when a build is ready to publish.
 
 ## Boundaries between skills
 
@@ -48,5 +50,6 @@ Each rule lives in exactly one skill:
 - Anything route-shaped → `flutter-navigation`
 - Anything user-facing text → `flutter-i18n`
 - Anything asserted about behavior → `flutter-testing`
-- Anything outside `lib/` (tooling, lints, codegen, CI) → `flutter-project-setup`
+- Anything outside `lib/` (tooling, lints, codegen) → `flutter-project-setup`
+- Anything pipeline-shaped (CI jobs, local gate, coverage, releases) → `flutter-ci`
 - Anything the store shows to a user → `flutter-release-notes`
