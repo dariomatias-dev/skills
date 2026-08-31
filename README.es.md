@@ -1,6 +1,6 @@
 <br>
 <div align="center">
-<img src="https://img.shields.io/badge/Agent%20Skills-20-informational?style=for-the-badge" alt="Agent Skills">
+<img src="https://img.shields.io/badge/Agent%20Skills-23-informational?style=for-the-badge" alt="Agent Skills">
 <img src="https://img.shields.io/badge/Claude%20Code-compatible-D97757?style=for-the-badge&logo=anthropic&logoColor=white" alt="Claude Code">
 <img src="https://img.shields.io/badge/Flutter-cubierto-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Flutter">
 <img src="https://img.shields.io/badge/Licencia-MIT-yellow?style=for-the-badge" alt="Licencia: MIT">
@@ -66,7 +66,8 @@ Estructura feature-first, MVVM sobre Clean Architecture simplificada, Riverpod, 
 | [flutter-responsive-layout](flutter/flutter-responsive-layout/) | Breakpoints, estructura adaptativa |
 | [flutter-testing](flutter/flutter-testing/) | Unitario, widget, golden, integración |
 | [flutter-i18n](flutter/flutter-i18n/) | Archivos ARB, plurales, cambio de idioma |
-| [flutter-project-setup](flutter/flutter-project-setup/) | Herramientas, lints, codegen, CI/CD |
+| [flutter-project-setup](flutter/flutter-project-setup/) | Herramientas, lints, codegen, assets |
+| [flutter-ci](flutter/flutter-ci/) | Pipeline, gate local, artefactos de release |
 | [flutter-seed-data](flutter/flutter-seed-data/) | Datos de desarrollo, guarda de release |
 | [flutter-screenshots](flutter/flutter-screenshots/) | Captura dirigida para listados |
 | [flutter-release-notes](flutter/flutter-release-notes/) | Texto de listado en la tienda para un release |
@@ -78,6 +79,8 @@ Convenciones de documento válidas para cualquier repositorio, sea cual sea su t
 | Skill | Cubre |
 | --- | --- |
 | [markdown-readme](markdown/markdown-readme/) | Estructura de readme, badges, versiones traducidas |
+| [markdown-community-health](markdown/markdown-community-health/) | Guía de contribución, política de seguridad |
+| [markdown-architecture-doc](markdown/markdown-architecture-doc/) | Documento de arquitectura, capas, notas de decisión |
 
 Otras tecnologías se incorporarán como carpetas separadas en la raíz.
 
@@ -99,7 +102,9 @@ Otras tecnologías se incorporarán como carpetas separadas en la raíz.
 │   └── ...
 ├── markdown/
 │   ├── .claude-plugin/
-│   └── markdown-readme/
+│   ├── markdown-readme/
+│   ├── markdown-community-health/
+│   └── markdown-architecture-doc/
 ├── CONTRIBUTING.md
 ├── LICENSE
 └── README.md
@@ -118,7 +123,7 @@ claude plugin marketplace add dariomatias-dev/skills
 claude plugin install flutter@dariomatias-dev
 ```
 
-Reinicia Claude Code. Las diecinueve skills se cargan automáticamente y aparecen bajo el namespace del plugin, como en `flutter:flutter-architecture`.
+Reinicia Claude Code. Las veinte skills se cargan automáticamente y aparecen bajo el namespace del plugin, como en `flutter:flutter-architecture`.
 
 | Tarea | Comando |
 | --- | --- |
