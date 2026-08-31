@@ -52,7 +52,9 @@ Delete comments that restate the code, commented-out code, and `TODO`s with no o
 ## Widgets
 
 - Split into separate widget classes instead of `_buildX()` helper methods: real classes rebuild independently and can be `const`.
+- One public widget class per file, named after the file. A second widget trailing a screen in the same file is invisible from the directory listing and gets duplicated instead of reused.
 - Keep a widget file focused; when a build method needs scrolling to read, extract.
+- Widgets built for a single screen live in a folder named after that screen, so the ones that are shared are the ones sitting loose beside it.
 - No business rules, formatting logic or persistence in widgets.
 - No hardcoded colors, spacing, radii, durations or text styles. Token rules: `flutter-design-system`.
 

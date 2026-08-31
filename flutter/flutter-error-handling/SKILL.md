@@ -41,6 +41,32 @@ void main() {
 
 Returning `true` from `onError` marks the error handled and stops the default print. Returning `false` lets it propagate to the platform, which on release usually means a crash.
 
+## Failures before the first frame
+
+The handlers above assume a running app. Platform initialization that runs before `runApp`, a plugin registering a notification channel, a native library loading, a database opening, is outside all of them. An exception there aborts startup and leaves a black screen: no widget tree, no error boundary, nothing for the user to act on and nothing in the report explaining why.
+
+Guard the startup sequence explicitly, and give the failure a screen of its own:
+
+```dart
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  installErrorHandlers(reporter);
+
+  try {
+    final dependencies = await initializePlatformServices();
+    runApp(App(dependencies: dependencies));
+  } catch (error, stackTrace) {
+    reportError(error, stackTrace);
+    runApp(const StartupFailureScreen());
+  }
+}
+```
+
+- The failure screen offers to retry the whole sequence. Startup failures are frequently transient: a busy audio service, a permission not yet granted, a device still mounting storage.
+- Distinguish what can be retried from what cannot. A corrupt local database will fail identically forever, and its recovery is clearing local state, not trying again.
+- Initialize error reporting first, before anything that can fail, or the failure you most need to see is the one that goes unreported.
+- Offering a restart means rebuilding the tree from a fresh state, not calling `main` again.
+
 ## The release error widget
 
 By default a build failure renders the grey error box in debug and a plain grey area in release. Replace it so the user sees something intelligible:

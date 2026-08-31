@@ -103,6 +103,20 @@ Mirror the `lib/` structure; name files `<source>_test.dart`.
 - Each test is independent and deterministic; inject clocks and id generators instead of using real time and random values.
 - Always `addTearDown` for subscriptions and databases; containers get it from `ProviderContainer.test()`.
 
+## Coverage
+
+Coverage measures which lines ran, not whether the assertions were meaningful. It is useful as a floor that stops untested code from landing, and misleading as a target.
+
+Exclude before measuring:
+
+- Generated sources. They mirror hand-written declarations, so counting them makes the number rise when an annotated class is added and no test is written.
+- Localization output.
+- Schema and table declarations, which are data rather than logic.
+
+Without those exclusions the figure drifts on its own and stops meaning anything.
+
+Pick a threshold the project can hold and enforce it in the pipeline; the gate itself is covered by `flutter-ci`. A file with no logic worth testing is excluded deliberately and visibly, never covered by a test written only to move the percentage.
+
 ## Stability
 
 A flaky test is a broken test. It is worse than a missing test, because a suite that fails at random trains the team to rerun the job instead of reading the failure, and a real regression then passes unnoticed among the reruns.
