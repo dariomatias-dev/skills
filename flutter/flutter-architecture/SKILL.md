@@ -47,6 +47,7 @@ core/
 ├── errors/         # app exception types
 ├── extensions/     # extensions used by more than one feature
 ├── navigation/     # router, typed routes, navigators
+├── audio/          # playback engine, media session, audio focus
 ├── permissions/    # platform permission abstraction
 ├── providers/      # global providers with no better home (clock, observers)
 ├── services/       # id generation, platform readers, caches
@@ -116,6 +117,8 @@ Add a use case only when at least one holds:
 - the logic deserves isolated tests.
 
 A class that only forwards one call to one repository is not a use case. Delete it.
+
+When one does clear the bar, it lives in the feature's `domain/`, beside the entities and contracts it composes, as one file per operation named after the operation (`create_backup.dart`, `restore_backup.dart`). It is domain logic, so it must not import anything from `data/` or `presentation/`. A `use_cases/` subfolder is worth creating only once there are enough of them that the folder listing is hard to read; three files do not qualify.
 
 ## Abstractions
 
