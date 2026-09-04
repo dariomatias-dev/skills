@@ -88,6 +88,10 @@ Exclude generated sources, localization output and schema declarations before me
 
 Fail the build below the threshold, and treat lowering the threshold as a decision that needs a reason in the commit.
 
+## Dependency vulnerability scanning
+
+Run a lockfile vulnerability scan (`osv-scanner` or equivalent) as its own job, against every `pubspec.lock` in the repository, including local packages. Report it rather than gate on it at first: a scanner surfacing a transitive advisory with no fix available yet should not block every pull request until the upstream releases one. Move it to gating once the project has a process for triaging and, when appropriate, suppressing a specific advisory.
+
 ## Speed
 
 - Cache the SDK and the pub cache. A cold install dominates a short pipeline.
