@@ -81,12 +81,10 @@ The project keeps, at all times:
 - no duplicated logic;
 - tests for relevant rules and flows.
 
-Run before every commit:
+Run the project's own verification gate before every commit, rather than a hand-typed subset of it. One script runs what CI runs, and keeping a second list here is how the two drift; the gate is covered by `flutter-ci`.
 
 ```bash
-dart format .
-flutter analyze
-flutter test
+./scripts/verify.sh
 ```
 
 Use a strict lint set (for example `very_good_analysis`) and treat a rule you must disable as a decision to document, not a nuisance to silence file by file.

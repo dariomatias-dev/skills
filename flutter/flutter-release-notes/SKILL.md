@@ -8,7 +8,7 @@ license: MIT
 
 Store release notes describe what changed **for the person using the app**. They are not a changelog, and they are not a summary of the work done.
 
-Scope is the listing text. The release pipeline that produces the build is covered by `flutter-project-setup`.
+Scope is the listing text. The release pipeline that produces the build, and the automation that derives the version and changelog from commits, are covered by `flutter-ci`.
 
 ## The inclusion test
 

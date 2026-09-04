@@ -33,11 +33,13 @@ nullable-getter: false
 lib/l10n/
 ├── app_en.arb        # base locale
 ├── app_es.arb
-├── app_pt_BR.arb
+├── app_pt.arb
 └── app_zh.arb
 ```
 
 English is the base locale; every other file is a translation of it. Wire `localizationsDelegates` and `supportedLocales` in the root app widget.
+
+The filename suffix is the locale the file resolves to, and the choice between `app_pt.arb` and `app_pt_BR.arb` is a real one. A language-only file matches every device set to that language; a language-and-region file matches only that region, so a device set to a different one falls back to the base locale. Ship the region-qualified file only when a second region of the same language is also translated. The user-facing label ("Português (Brasil)") and the document filename convention (`README.pt-BR.md`) are independent of it, and there is no reason for them to match the ARB suffix.
 
 ## Writing messages
 
@@ -85,5 +87,5 @@ The UI package never imports the app's localization; components receive text as 
 
 - Enable `use_build_context_synchronously`-safe access: read `AppLocalizations.of(context)` before an `await`, not after.
 - Keep every ARB file with the same key set; a missing key silently falls back to the base language.
-- Check in CI that translations are complete and that no source file contains a user-facing literal.
+- Check in CI that translations are complete and that no source file contains a user-facing literal. Nothing else catches an incomplete translation: the generator falls back to the template for a missing key and reports nothing, so a half-translated change ships as base-language text inside a translated build. The pipeline step: `flutter-ci`.
 - Do not describe capabilities the product does not have. Copy is part of the product contract, not filler.

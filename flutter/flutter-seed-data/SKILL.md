@@ -10,6 +10,12 @@ Seeds fill a local database with realistic data so a developer, a designer or a 
 
 They are development tooling. The rules below exist because a seed that escapes into a real build writes to a real user's database.
 
+## Whether the project needs them
+
+Seeds earn their maintenance cost when a person has to look at a populated app: manual development, design review, a demo. They are not the way to get data into a test, and they are not the only way to get data into a screenshot run, which can build its own state through provider overrides instead (`flutter-screenshots`).
+
+A fixture that only ever runs inside a test lives with the tests, in the test helpers, and none of the rules below apply to it. Promoting it to a seed means it now ships in the app's source and needs the guards.
+
 ## Safety first
 
 | Rule | Reason |

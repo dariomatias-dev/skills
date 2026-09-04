@@ -60,11 +60,22 @@ A screenshot run must produce identical output every time, or every run shows a 
 Pin everything the image depends on, before pumping the app:
 
 - Theme mode, so a device in dark mode does not produce a light-mode listing.
-- Seeded data, which `flutter-seed-data` covers making deterministic.
+- The data on screen.
 - Any onboarding or first-run flag, set to completed, so the capture does not start on a welcome screen.
-- Providers overridden with the prepared database and preferences, the same way a widget test does it.
+- Platform services faked, so a capture does not depend on a permission dialog or on what is actually installed on the device.
 
 Anything read from the real device, the clock, the battery, the locale of the host, will differ between machines and between runs.
+
+### Two ways to get the data there
+
+| Approach | How | Use when |
+| --- | --- | --- |
+| Provider overrides in the test | The test builds an in-memory database, writes the records it wants and pumps the app's root widget with those overrides, exactly as a widget test does | Default. The data is visible in the test that depends on it, and nothing is installed on the device |
+| Seed flag on a normal launch | The test drives the real entry point, and the app seeds itself because the run was started with the seed flag | The app cannot be pumped with overrides, or the capture must exercise the real startup path |
+
+The first needs no seed infrastructure at all, so a project with no development seeds does not have to build them to get screenshots. The second reuses the seeds a project already has; its rules, including the release guard, are covered by `flutter-seed-data`.
+
+Whichever is used, it is one decision for the whole target. A run that overrides some dependencies and lets others resolve for real produces images that differ per machine in ways nobody can explain from the diff.
 
 ## Multiple locales
 
@@ -91,15 +102,16 @@ mkdir -p screenshots
 flutter drive \
   --driver=test_driver/integration_test.dart \
   --target=integration_test/screenshot_test.dart \
-  --dart-define=SEED_ENABLED=true \
   "${DEVICE_ARGS[@]}"
 ```
+
+Add `--dart-define=SEED_ENABLED=true` only when the target takes the seed-flag path above; with provider overrides the flag does nothing and misleads whoever reads the script next.
 
 - `set -euo pipefail` so a failed capture stops the run instead of leaving a half-updated folder.
 - `cd` to the project root so the script works from any directory.
 - Clear the output folder first, or a renamed screen leaves its old image behind forever.
 - Accept an optional device id, defaulting to the only connected device.
-- Keep the run in debug. Seeds are guarded on debug mode, so a release build silently produces screenshots of an empty app rather than failing.
+- Keep the run in debug. `flutter drive` needs it, and seeds, when used, are guarded on debug mode, so a release build silently produces screenshots of an empty app rather than failing.
 
 ## Choosing what to capture
 

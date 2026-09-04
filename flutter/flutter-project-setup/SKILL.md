@@ -10,7 +10,9 @@ Everything a project needs before feature work starts.
 
 ## SDK and dependencies
 
-Pin the Flutter version per project in `pubspec.yaml`, and point the local version manager (FVM or equivalent) at that same constraint:
+The Flutter version is pinned once, in one file, and every other consumer reads that file. Which file depends on whether the project uses a version manager, and the two options are not interchangeable.
+
+**Without a version manager**, the pin lives in `pubspec.yaml` and CI reads it directly:
 
 ```yaml
 environment:
@@ -18,7 +20,24 @@ environment:
   flutter: 3.35.0
 ```
 
-One pin, read by both sides: CI resolves it with `flutter-version-file: pubspec.yaml`, the developer machine resolves it through the version manager. A second pin stored somewhere else drifts from this one silently.
+```yaml
+- uses: subosito/flutter-action@v2
+  with:
+    flutter-version-file: pubspec.yaml
+```
+
+**With FVM**, the pin lives in `.fvmrc`, because that is the only file FVM reads. It does not consult `environment.flutter`, so adding the key there as well creates a second pin that drifts the first time one of them is bumped alone. Have CI read `.fvmrc` instead of restating the version:
+
+```yaml
+- id: sdk
+  run: echo "version=$(jq -r .flutter .fvmrc)" >> "$GITHUB_OUTPUT"
+
+- uses: subosito/flutter-action@v2
+  with:
+    flutter-version: ${{ steps.sdk.outputs.version }}
+```
+
+A hardcoded `FLUTTER_VERSION` env var in the workflow is the common shortcut here, and it is the drift this rule exists to prevent: the version manager upgrades, the workflow keeps building on the old SDK, and the difference surfaces as a failure that reproduces only in CI. If the project has more than one workflow, the version is read once in the workflow that owns it and passed down, never copied into each file.
 
 The versions above are an example; pin whatever the project is on. Dart 3.7 is the floor, since the wildcard parameters used in these skills (`(_, _) =>`) do not parse below it.
 
@@ -66,7 +85,7 @@ Dependabot is configuration, not a pipeline job: it opens pull requests, it does
 
 Renovate is the alternative, configured through `renovate.json` instead of a GitHub-specific file; pick either, not both. Its advantage over Dependabot here is `packageRules`: a project with dependencies pinned for a documented reason (an analyzer version conflict, an EOL package, a native toolchain ceiling) can disable or group updates for exactly those packages by name, instead of relying on someone noticing the pin and closing the PR by hand every time it recurs.
 
-Whichever tool is used, cross-reference it with the reasoning: a pin justified in a dependency-notes document (`markdown-architecture-doc`) but not reflected in the automation config still generates a pull request nobody should merge, over and over.
+Whichever tool is used, cross-reference it with the reasoning: a pin justified in a dependency-notes document but not reflected in the automation config still generates a pull request nobody should merge, over and over. What that document holds per pin, and the comment the manifest carries at the pin itself: `markdown-architecture-doc`.
 
 ## Local packages
 
@@ -145,7 +164,7 @@ Every OS-level capability the app uses (camera, location, background audio, noti
 - One permission, one line, one reason: each entry should trace back to a single feature. A permission with no corresponding runtime request in the Dart code raises the app's risk profile for no functional benefit, and app store review can reject it on that basis alone.
 - iOS usage description strings are user-facing copy, not internal documentation: write what the person granting the permission actually needs to know, and localize them the same way any other user-facing string is localized.
 - A build tool constraint that lives in the native project (a `compileSdk` floor forced by a plugin, a minimum OS version) belongs in a comment in that native file, cross-referencing the CI workflow env var or variable that must move with it. The two drift silently otherwise: a plugin bump raises the floor, the native file is updated, and the pipeline keeps building against the old one until a version-mismatch failure with no obvious cause.
-- A capability that keeps running while the app is backgrounded (audio playback, location tracking, a long download) needs the corresponding platform declaration (a foreground service type on Android, a background mode on iOS) in addition to the runtime permission; the permission alone does not keep the process alive.
+- A capability that keeps running while the app is backgrounded (audio playback, location tracking, a long download) needs the corresponding platform declaration (a foreground service type on Android, a background mode on iOS) in addition to the runtime permission; the permission alone does not keep the process alive. The Dart side of background playback, including what each missing declaration looks like at runtime, is covered by `flutter-background-audio`.
 
 ## Repository files
 
