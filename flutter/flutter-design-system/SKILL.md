@@ -107,10 +107,12 @@ Standard components for loading, empty, error, permission and retry states, plus
 
 - Semantic labels on controls and list items; state changes announced.
 - Minimum touch target of 48dp.
-- Sufficient contrast in both themes.
-- Text scaling supported with a controlled upper clamp.
+- Sufficient contrast in both themes, asserted on the tokens rather than inspected per component.
+- Text scaling clamped once at the root, and layouts that survive the clamped maximum.
 - Predictable focus order.
 - Never convey meaning by color alone.
+
+The rules per case, the clamp and the contrast matrix test: [accessibility.md](references/accessibility.md).
 
 ## Testing
 
