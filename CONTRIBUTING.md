@@ -145,6 +145,15 @@ This project follows [Conventional Commits](https://www.conventionalcommits.org/
 | `docs` | READMEs, contributing, translations |
 | `refactor` | Reorganizing content with no change in meaning |
 | `chore` | Tooling, licensing, repository files |
+| `ci` | Workflow files, hooks, pipeline configuration |
+
+Enable the commit message hook once per clone, so a malformed message is caught before it is committed rather than in review:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+It rejects a subject that does not match `<type>(<scope>): <subject>`, is over 72 characters, ends with a period, or starts with a capital letter, and rejects a body line over 80 characters (URLs and trailers are exempt). `Merge` and `Revert` commits pass through untouched.
 
 The scope is the skill or technology: `feat(flutter-navigation): document shell route Hero collision`.
 
