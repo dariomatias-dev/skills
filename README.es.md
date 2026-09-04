@@ -58,6 +58,8 @@ Estructura feature-first, MVVM sobre Clean Architecture simplificada, Riverpod, 
 | [flutter-design-system](flutter/flutter-design-system/) | Paquete de UI, tokens, componentes |
 | [flutter-layout-insets](flutter/flutter-layout-insets/) | Safe areas, barras del sistema, teclado |
 | [flutter-animation](flutter/flutter-animation/) | Controllers, rebuilds, rendimiento de motion |
+| [flutter-performance](flutter/flutter-performance/) | Profiling, isolates, batching, coste de decode |
+| [flutter-background-audio](flutter/flutter-background-audio/) | Sesión de medios, interrupciones, reproducción en segundo plano |
 | [flutter-data-layer](flutter/flutter-data-layer/) | Repositorios, elección de storage, errores |
 | [flutter-database](flutter/flutter-database/) | Schema, índices, transacciones, migraciones |
 | [flutter-networking](flutter/flutter-networking/) | Contrato HTTP, retry, refresh de token |
@@ -107,7 +109,8 @@ Otras tecnologías se incorporarán como carpetas separadas en la raíz.
 │   └── markdown-architecture-doc/
 ├── CONTRIBUTING.md
 ├── LICENSE
-└── README.md
+├── README.md
+└── SECURITY.md
 ```
 
 Una carpeta por tecnología, una carpeta por skill. Una skill es un `SKILL.md` más un directorio `references/` opcional, para el material que no pertenece al archivo principal.
@@ -123,7 +126,7 @@ claude plugin marketplace add dariomatias-dev/skills
 claude plugin install flutter@dariomatias-dev
 ```
 
-Reinicia Claude Code. Las veinte skills se cargan automáticamente y aparecen bajo el namespace del plugin, como en `flutter:flutter-architecture`.
+Reinicia Claude Code. Las veintidós skills se cargan automáticamente y aparecen bajo el namespace del plugin, como en `flutter:flutter-architecture`.
 
 | Tarea | Comando |
 | --- | --- |
@@ -185,6 +188,8 @@ Las convenciones de autoría completas están documentadas en [CONTRIBUTING.md](
 Las contribuciones son bienvenidas, ya sea la corrección de una regla existente, una skill nueva o el soporte para una tecnología adicional.
 
 Antes de abrir un pull request, consulta [CONTRIBUTING.md](CONTRIBUTING.md) para las convenciones de autoría, el formato de mensajes de commit (Conventional Commits) y las reglas de ramas que sigue este proyecto.
+
+Una vulnerabilidad en la guía de una skill o en el tooling del repositorio se reporta de forma privada, según la [política de seguridad](SECURITY.md).
 
 ## Licencia
 

@@ -58,6 +58,8 @@ Feature-first structure, MVVM over a simplified Clean Architecture, Riverpod, ty
 | [flutter-design-system](flutter/flutter-design-system/) | UI package, tokens, components |
 | [flutter-layout-insets](flutter/flutter-layout-insets/) | Safe areas, system bars, keyboard |
 | [flutter-animation](flutter/flutter-animation/) | Controllers, rebuilds, motion performance |
+| [flutter-performance](flutter/flutter-performance/) | Profiling, isolates, batching, decode cost |
+| [flutter-background-audio](flutter/flutter-background-audio/) | Media session, interruptions, background playback |
 | [flutter-data-layer](flutter/flutter-data-layer/) | Repositories, storage choice, errors |
 | [flutter-database](flutter/flutter-database/) | Schema, indexes, transactions, migrations |
 | [flutter-networking](flutter/flutter-networking/) | HTTP contract, retry, token refresh |
@@ -107,7 +109,8 @@ Additional technologies will be added as separate top-level folders.
 │   └── markdown-architecture-doc/
 ├── CONTRIBUTING.md
 ├── LICENSE
-└── README.md
+├── README.md
+└── SECURITY.md
 ```
 
 One folder per technology, one folder per skill. A skill is a `SKILL.md` plus an optional `references/` directory for material that does not belong in the main file.
@@ -123,7 +126,7 @@ claude plugin marketplace add dariomatias-dev/skills
 claude plugin install flutter@dariomatias-dev
 ```
 
-Restart Claude Code. The twenty skills are loaded automatically and appear under the plugin namespace, as in `flutter:flutter-architecture`.
+Restart Claude Code. The twenty-two skills are loaded automatically and appear under the plugin namespace, as in `flutter:flutter-architecture`.
 
 | Task | Command |
 | --- | --- |
@@ -185,6 +188,8 @@ The complete authoring conventions are documented in [CONTRIBUTING.md](CONTRIBUT
 Contributions are welcome, whether a correction to an existing rule, a new skill, or support for an additional technology.
 
 Before opening a pull request, review [CONTRIBUTING.md](CONTRIBUTING.md) for the authoring conventions, the commit message format (Conventional Commits), and the branching rules this project follows.
+
+A vulnerability in a skill's guidance or in the repository's tooling is reported privately, as described in the [security policy](SECURITY.md).
 
 ## License
 

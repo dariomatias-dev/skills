@@ -13,6 +13,8 @@ They are project-agnostic: no app-specific names, entities or domains.
 | [flutter-design-system](flutter-design-system/) | UI package, tokens, theme, state/feedback components, motion, a11y |
 | [flutter-layout-insets](flutter-layout-insets/) | Safe areas, system bars, cutout, keyboard, edge-to-edge |
 | [flutter-animation](flutter-animation/) | Controller lifecycle, rebuild limits, Hero, motion performance |
+| [flutter-performance](flutter-performance/) | Profiling, isolates, batching, image decode, list and startup cost |
+| [flutter-background-audio](flutter-background-audio/) | Player contract, OS media session, interruptions, foreground playback |
 | [flutter-data-layer](flutter-data-layer/) | Repositories, data sources, storage choice, ids, errors |
 | [flutter-database](flutter-database/) | Schema, indexes, DAOs, transactions, migrations |
 | [flutter-networking](flutter-networking/) | HTTP contract, timeouts, retry, status mapping, token refresh |
@@ -38,6 +40,8 @@ They are project-agnostic: no app-specific names, entities or domains.
 7. `flutter-i18n` and `flutter-testing`: applied continuously, not at the end.
 8. `flutter-release-notes`: when a build is ready to publish.
 
+The rest load on demand, not in order: `flutter-forms`, `flutter-layout-insets`, `flutter-responsive-layout`, `flutter-animation`, `flutter-networking`, `flutter-background-audio`, `flutter-performance`, `flutter-seed-data` and `flutter-screenshots` each answer a situation that may never come up in a given project.
+
 ## Boundaries between skills
 
 Each rule lives in exactly one skill:
@@ -52,4 +56,6 @@ Each rule lives in exactly one skill:
 - Anything asserted about behavior → `flutter-testing`
 - Anything outside `lib/` (tooling, lints, codegen) → `flutter-project-setup`
 - Anything pipeline-shaped (CI jobs, local gate, coverage, releases) → `flutter-ci`
+- Anything that keeps running while the app is backgrounded → `flutter-background-audio`
+- Anything measured in frames, milliseconds or megabytes → `flutter-performance`
 - Anything the store shows to a user → `flutter-release-notes`
