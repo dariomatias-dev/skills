@@ -11,6 +11,7 @@ Contributions are welcome, whether a fix to an existing rule, a new skill, or a 
 - [Commit Convention](#commit-convention)
 - [Branching](#branching)
 - [Pull Requests](#pull-requests)
+- [Reporting a Vulnerability](#reporting-a-vulnerability)
 
 ## Repository Layout
 
@@ -175,3 +176,7 @@ docs/es-translation
 - State which skills the change touches and why the rule belongs there rather than in a neighboring skill.
 - For a rule that documents a real failure, describe the failure you hit.
 - For a new skill, include the reasoning behind its boundary: what it owns, and what it deliberately leaves to other skills.
+
+## Reporting a Vulnerability
+
+Guidance that would lead an agent to write insecure code, and any vulnerability in this repository's scripts or workflows, is reported privately rather than in a public issue. See [SECURITY.md](SECURITY.md).
