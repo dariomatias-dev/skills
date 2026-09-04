@@ -23,7 +23,7 @@ If a test only restates the implementation line by line, it has no value.
 
 - **Fake**: a working in-memory implementation of a contract. Default choice for repositories, storage and platform services.
 - **Mock** (`mocktail`): for verifying interactions or simulating failures.
-- Every platform-dependent service (audio, permissions, filesystem, camera, location) ships a fake so flows can be tested without a device. That is the main reason those contracts exist.
+- Every platform-dependent service (audio, permissions, filesystem, camera, location) ships a fake so flows can be tested without a device. That is the main reason those contracts exist. A fake that also records what it emitted lets a test assert on the sequence rather than only the final value.
 - In-memory database for DAO tests; no test touches real device storage.
 
 ```dart

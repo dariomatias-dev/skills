@@ -62,7 +62,7 @@ Future<void> main() async {
 }
 ```
 
-- The failure screen offers to retry the whole sequence. Startup failures are frequently transient: a busy audio service, a permission not yet granted, a device still mounting storage.
+- The failure screen offers to retry the whole sequence. Startup failures are frequently transient: a busy audio service, a permission not yet granted, a device still mounting storage. Note that a retry must not re-run an initializer that only tolerates being called once per process (`flutter-background-audio` covers one such case).
 - Distinguish what can be retried from what cannot. A corrupt local database will fail identically forever, and its recovery is clearing local state, not trying again.
 - Initialize error reporting first, before anything that can fail, or the failure you most need to see is the one that goes unreported.
 - Offering a restart means rebuilding the tree from a fresh state, not calling `main` again.

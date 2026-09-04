@@ -93,7 +93,7 @@ Other rules:
 - DTOs live in the data layer and exist to mirror the wire format, including its inconsistencies. The entity stays clean; the mapping absorbs the mess.
 - Never let a `Map<String, dynamic>` travel above the data source.
 - Treat every field as untrusted. A null in a field the contract promised is a parsing failure with a clear message, not a crash three screens later.
-- Parse large payloads off the main thread. Decoding a multi-megabyte response on the UI isolate drops frames; move it with `compute` and measure before assuming it is needed.
+- Parse large payloads off the main thread. Decoding a multi-megabyte response on the UI isolate drops frames; move it with `compute` and measure before assuming it is needed. When that move pays off and what it costs: `flutter-performance`.
 - An unknown enum value from the server must degrade to a documented fallback rather than throw. Servers add cases without asking.
 
 ## Pagination

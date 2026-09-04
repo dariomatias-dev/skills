@@ -71,7 +71,7 @@ Before a destructive change, decide what happens to the data that does not fit. 
 - Select the columns you need. `SELECT *` on a table with a large blob loads it on every row.
 - Avoid the N+1 pattern: one query for a list followed by one query per item. Use a join or a single batched lookup.
 - Use transactions for multi-table writes so a failure halfway does not leave half the change committed.
-- Use batch inserts for bulk work. Inserting a thousand rows one statement at a time is dominated by transaction overhead.
+- Use batch inserts for bulk work. Inserting a thousand rows one statement at a time is dominated by transaction overhead. Choosing a batch size for a long import that also reports progress: `flutter-performance`.
 - Paginate at the query level with limit and offset or a cursor, never by loading everything and slicing in Dart.
 
 ## Testing

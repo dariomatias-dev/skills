@@ -126,7 +126,7 @@ core/errors/
 
 ## Caching
 
-Cache derived expensive artifacts (thumbnails, extracted metadata, parsed documents) on disk with the source key as identity, and expose a way to clear the cache. Never cache in a static global; put it behind a provider so it can be replaced in tests.
+Cache derived expensive artifacts (thumbnails, extracted metadata, parsed documents) on disk with the source key as identity, and expose a way to clear the cache. What makes the cached artifact cheap to render, such as decoding an image at the size it is drawn: `flutter-performance`. Never cache in a static global; put it behind a provider so it can be replaced in tests.
 
 ## Anti-patterns
 

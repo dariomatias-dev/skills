@@ -6,7 +6,7 @@ license: MIT
 
 # Animation
 
-This skill covers the mechanics: how to build an animation that disposes cleanly and holds its frame budget.
+This skill covers the mechanics: how to build an animation that disposes cleanly and holds its frame budget. Frame cost that is not caused by an animation, along with profiling method, isolates and memory, is covered by `flutter-performance`.
 
 Whether something should animate at all, how long it should take and which curve it uses are policy decisions covered by `flutter-design-system`. Route transitions are covered by `flutter-navigation`.
 
