@@ -1,6 +1,6 @@
 ---
 name: flutter-animation
-description: Implement animations in Flutter without leaks or jank: choosing implicit versus explicit, AnimationController lifecycle, limiting rebuilds, Hero flights, list and page performance. Use when writing an animated widget, debugging a ticker or dispose error, fixing dropped frames during motion, or reviewing animation code.
+description: "Implement animations in Flutter without leaks or jank: choosing implicit versus explicit, AnimationController lifecycle, limiting rebuilds, Hero flights, list and page performance. Use when writing an animated widget, debugging a ticker or dispose error, fixing dropped frames during motion, or reviewing animation code."
 license: MIT
 ---
 

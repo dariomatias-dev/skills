@@ -1,6 +1,6 @@
 ---
 name: flutter-testing
-description: Testing strategy for Flutter apps: unit, widget, golden and integration tests, fakes for platform services, and provider overrides. Use when writing or reviewing tests, deciding what deserves a test, setting up test doubles, or debugging flaky widget and golden tests.
+description: "Testing strategy for Flutter apps: unit, widget, golden and integration tests, fakes for platform services, provider overrides, and a whole-graph wiring smoke test. Use when writing or reviewing tests, deciding what deserves a test, setting up test doubles, verifying the provider graph wires together, or debugging flaky widget and golden tests."
 license: MIT
 ---
 

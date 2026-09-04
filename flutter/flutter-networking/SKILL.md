@@ -1,6 +1,6 @@
 ---
 name: flutter-networking
-description: Remote data access in Flutter: HTTP client behind a contract, timeouts and cancellation, retry policy, status code to exception mapping, token refresh without stampedes, DTO parsing and pagination. Use when calling an API, designing a remote data source, handling request failures or authentication, or reviewing networking code.
+description: "Remote data access in Flutter: HTTP client behind a contract, timeouts and cancellation, retry policy, status code to exception mapping, token refresh without stampedes, DTO parsing and pagination. Use when calling an API, designing a remote data source, handling request failures or authentication, or reviewing networking code."
 license: MIT
 ---
 

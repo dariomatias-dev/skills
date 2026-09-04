@@ -1,6 +1,6 @@
 ---
 name: flutter-code-style
-description: Dart and Flutter coding conventions: naming, immutability, comments, widget composition, and quality gates. Use when writing or reviewing Dart code, naming files/classes/providers, deciding on comments and documentation, or enforcing analyzer and formatting standards.
+description: "Dart and Flutter coding conventions: naming, immutability, comments, widget composition, and quality gates. Use when writing or reviewing Dart code, naming files/classes/providers, deciding on comments and documentation, or enforcing analyzer and formatting standards."
 license: MIT
 ---
 

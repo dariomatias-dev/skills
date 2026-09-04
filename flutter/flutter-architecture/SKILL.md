@@ -1,6 +1,6 @@
 ---
 name: flutter-architecture
-description: Feature-first project structure for Flutter apps using MVVM over a simplified Clean Architecture. Use when creating a Flutter project, adding a feature, deciding where a file belongs, choosing whether to add a layer/abstraction/use case, or reviewing structural consistency.
+description: "Feature-first project structure for Flutter apps using MVVM over a simplified Clean Architecture. Use when creating a Flutter project, adding a feature, deciding where a file belongs, choosing whether to add a layer/abstraction/use case, or reviewing structural consistency."
 license: MIT
 ---
 

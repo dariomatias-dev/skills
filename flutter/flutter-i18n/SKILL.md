@@ -1,6 +1,6 @@
 ---
 name: flutter-i18n
-description: Internationalization for Flutter apps with flutter_localizations, intl and ARB files: setup, message authoring, plurals and placeholders, locale switching and formatting. Use when adding user-facing text, adding a locale, formatting dates/numbers/durations, or reviewing code for hardcoded strings.
+description: "Internationalization for Flutter apps with flutter_localizations, intl and ARB files: setup, message authoring, plurals and placeholders, locale switching and formatting. Use when adding user-facing text, adding a locale, formatting dates/numbers/durations, or reviewing code for hardcoded strings."
 license: MIT
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: flutter-responsive-layout
-description: Adapt Flutter layouts across phone, tablet, foldable and desktop window sizes: breakpoints, LayoutBuilder versus MediaQuery, adaptive navigation and input, orientation and text scaling. Use when a layout must work on more than one screen size, when adding tablet or large-screen support, or when reviewing a screen for overflow and cramped spacing.
+description: "Adapt Flutter layouts across phone, tablet, foldable and desktop window sizes: breakpoints, LayoutBuilder versus MediaQuery, adaptive navigation and input, orientation and text scaling. Use when a layout must work on more than one screen size, when adding tablet or large-screen support, or when reviewing a screen for overflow and cramped spacing."
 license: MIT
 ---
 

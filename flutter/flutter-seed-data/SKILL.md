@@ -1,6 +1,6 @@
 ---
 name: flutter-seed-data
-description: Populate a Flutter app's local database with development data: seed structure, the release-build guard, idempotency, and running seeds as a standalone script without a device. Use when adding sample data for local development, building a demo state, preparing data for screenshots, or reviewing seed code for safety.
+description: "Populate a Flutter app's local database with development data: seed structure, the release-build guard, idempotency, and running seeds as a standalone script without a device. Use when adding sample data for local development, building a demo state, preparing data for screenshots, or reviewing seed code for safety."
 license: MIT
 ---
 

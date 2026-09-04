@@ -1,6 +1,6 @@
 ---
 name: markdown-architecture-doc
-description: Write an architecture document that maps how a codebase is put together: layout, layering, boundaries and the non-obvious decisions behind them. Use when writing or reviewing an ARCHITECTURE document, a decision-note style file, or deciding whether a structural decision belongs in documentation or only in code.
+description: "Write an architecture document that maps how a codebase is put together: layout, layering, boundaries and the non-obvious decisions behind them. Use when writing or reviewing an ARCHITECTURE document, a decision-note style file, or deciding whether a structural decision belongs in documentation or only in code."
 license: MIT
 ---
 

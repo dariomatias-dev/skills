@@ -1,6 +1,6 @@
 ---
 name: flutter-error-handling
-description: Catch and report failures at the app boundary in Flutter: FlutterError.onError, PlatformDispatcher.onError, release error widgets, logging discipline and what to do with an unrecoverable state. Use when wiring crash reporting, deciding how a failure surfaces to the user, reviewing catch blocks, or auditing logs for sensitive data.
+description: "Catch and report failures at the app boundary in Flutter: FlutterError.onError, PlatformDispatcher.onError, release error widgets, logging discipline and what to do with an unrecoverable state. Use when wiring crash reporting, deciding how a failure surfaces to the user, reviewing catch blocks, or auditing logs for sensitive data."
 license: MIT
 ---
 

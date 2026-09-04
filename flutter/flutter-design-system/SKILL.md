@@ -1,6 +1,6 @@
 ---
 name: flutter-design-system
-description: Flutter design system as a standalone local package: tokens, theme, component boundaries, motion and accessibility. Use when creating or extending a UI package, adding a shared component, defining tokens or themes, deciding where a widget belongs, or reviewing UI for hardcoded styling.
+description: "Flutter design system as a standalone local package: tokens, theme, component boundaries, motion and accessibility. Use when creating or extending a UI package, adding a shared component, defining tokens or themes, deciding where a widget belongs, or reviewing UI for hardcoded styling."
 license: MIT
 ---
 

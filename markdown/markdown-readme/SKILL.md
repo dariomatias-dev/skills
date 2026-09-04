@@ -1,6 +1,6 @@
 ---
 name: markdown-readme
-description: Structure a repository readme that reads as a product page: header block, section order, badges, installation, multi-language versions and the boundary with the other documents a project carries. Use when writing or reviewing a README, adding a translated version, or deciding which document a piece of documentation belongs in.
+description: "Structure a repository readme that reads as a product page: header block, section order, badges, installation, multi-language versions and the boundary with the other documents a project carries. Use when writing or reviewing a README, adding a translated version, or deciding which document a piece of documentation belongs in."
 license: MIT
 ---
 

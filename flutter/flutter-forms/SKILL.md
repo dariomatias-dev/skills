@@ -1,6 +1,6 @@
 ---
 name: flutter-forms
-description: Build forms in Flutter without leaks or validation noise: controller and focus node lifecycle, validation timing, server-side field errors, keyboard actions and submission state. Use when creating or reviewing a form, a text field, an input validator, or debugging a disposed controller or lost focus.
+description: "Build forms in Flutter without leaks or validation noise: controller and focus node lifecycle, validation timing, server-side field errors, keyboard actions and submission state. Use when creating or reviewing a form, a text field, an input validator, or debugging a disposed controller or lost focus."
 license: MIT
 ---
 

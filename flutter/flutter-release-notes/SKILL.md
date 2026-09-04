@@ -1,6 +1,6 @@
 ---
 name: flutter-release-notes
-description: Write store release notes for a mobile app release: what to include, the user-perceived benefit test, section structure, per-language character budget and the Google Play language tag format. Use when preparing a release, writing "what's new" text, converting a changelog or commit log into store copy, or reviewing release notes before publishing.
+description: "Write store release notes for a mobile app release: what to include, the user-perceived benefit test, section structure, per-language character budget and the Google Play language tag format. Use when preparing a release, writing \"what's new\" text, converting a changelog or commit log into store copy, or reviewing release notes before publishing."
 license: MIT
 ---
 

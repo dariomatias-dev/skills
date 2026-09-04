@@ -1,6 +1,6 @@
 ---
 name: flutter-database
-description: Local relational database in Flutter with Drift: schema and index design, DAOs, transactions, reactive queries, and migrations that preserve user data. Use when creating or changing a table, writing a migration, debugging a slow or repeated query, or reviewing schema changes before a release.
+description: "Local relational database in Flutter with Drift: schema and index design, DAOs, transactions, reactive queries, and migrations that preserve user data. Use when creating or changing a table, writing a migration, debugging a slow or repeated query, or reviewing schema changes before a release."
 license: MIT
 ---
 

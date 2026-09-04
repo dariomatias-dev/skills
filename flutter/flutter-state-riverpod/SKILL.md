@@ -1,6 +1,6 @@
 ---
 name: flutter-state-riverpod
-description: State management and dependency injection with Riverpod: ViewModels as Notifier/AsyncNotifier, provider types, lifecycle pitfalls, derived state and rebuild control. Use when creating a ViewModel or provider, wiring dependencies, debugging rebuilds or disposal errors, or reviewing Riverpod code.
+description: "State management and dependency injection with Riverpod: ViewModels as Notifier/AsyncNotifier, provider types, lifecycle pitfalls, derived state and rebuild control. Use when creating a ViewModel or provider, wiring dependencies, debugging rebuilds or disposal errors, or reviewing Riverpod code."
 license: MIT
 ---
 

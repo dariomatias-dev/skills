@@ -1,6 +1,6 @@
 ---
 name: flutter-ci
-description: Continuous integration and delivery for Flutter: the pipeline jobs, running the same checks locally, code generation and coverage gates, caching and speed, and tag-triggered release artifacts. Use when writing or fixing a workflow, adding a check, diagnosing a failure that only happens in CI, or speeding up a slow pipeline.
+description: "Continuous integration and delivery for Flutter: the pipeline jobs, running the same checks locally, code generation and coverage gates, dependency vulnerability scanning, caching and speed, and tag-triggered release artifacts. Use when writing or fixing a workflow, adding a check, diagnosing a failure that only happens in CI, or speeding up a slow pipeline."
 license: MIT
 ---
 

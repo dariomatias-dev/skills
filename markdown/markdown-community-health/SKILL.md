@@ -1,6 +1,6 @@
 ---
 name: markdown-community-health
-description: Write and structure the community health files a repository carries beyond the readme: CONTRIBUTING and SECURITY. Use when writing or reviewing a contributing guide, a security policy, or deciding whether a rule belongs in one of these versus the README.
+description: "Write and structure the community health files a repository carries beyond the readme: CONTRIBUTING and SECURITY. Use when writing or reviewing a contributing guide, a security policy, or deciding whether a rule belongs in one of these versus the README."
 license: MIT
 ---
 

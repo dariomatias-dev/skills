@@ -1,6 +1,6 @@
 ---
 name: flutter-layout-insets
-description: Handle system UI insets in Flutter layouts: safe areas, status bar, navigation bar, display cutout, keyboard insets and Android edge-to-edge. Use when content sits under a system bar or the keyboard, when choosing between SafeArea and MediaQuery padding, when a list is clipped at the top or bottom, or when adapting an app to Android 15 edge-to-edge enforcement.
+description: "Handle system UI insets in Flutter layouts: safe areas, status bar, navigation bar, display cutout, keyboard insets and Android edge-to-edge. Use when content sits under a system bar or the keyboard, when choosing between SafeArea and MediaQuery padding, when a list is clipped at the top or bottom, or when adapting an app to Android 15 edge-to-edge enforcement."
 license: MIT
 ---
 

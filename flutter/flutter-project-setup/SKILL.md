@@ -1,6 +1,6 @@
 ---
 name: flutter-project-setup
-description: Bootstrapping and tooling for Flutter projects: SDK pinning, dependencies, dependency-update automation, analysis options, code generation and assets. Use when starting a project, adding a local package, configuring lints or build_runner, or setting up Dependabot. Pipeline jobs and CI checks are covered by flutter-ci.
+description: "Bootstrapping and tooling for Flutter projects: SDK pinning, dependencies, dependency-update automation, analysis options, code generation, assets and platform manifests. Use when starting a project, adding a local package, configuring lints or build_runner, setting up Dependabot or Renovate, or declaring a permission or background mode in AndroidManifest.xml or Info.plist. Pipeline jobs and CI checks are covered by flutter-ci."
 license: MIT
 ---
 

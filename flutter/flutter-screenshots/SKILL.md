@@ -1,6 +1,6 @@
 ---
 name: flutter-screenshots
-description: Automate app screenshots in Flutter with flutter drive and integration_test: driver wiring, surface conversion, deterministic state, multiple locales and the capture script. Use when generating README or store listing images, adding a screenshot target, or fixing a capture that hangs, comes out blank or differs between runs.
+description: "Automate app screenshots in Flutter with flutter drive and integration_test: driver wiring, surface conversion, deterministic state, multiple locales and the capture script. Use when generating README or store listing images, adding a screenshot target, or fixing a capture that hangs, comes out blank or differs between runs."
 license: MIT
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: flutter-navigation
-description: Typed navigation with go_router and go_router_builder: route classes, per-feature navigators, shell routes, redirects and transitions. Use when adding or changing a route, wiring tab shells, guarding access, customizing page transitions, or fixing go_router_builder generation errors.
+description: "Typed navigation with go_router and go_router_builder: route classes, per-feature navigators, shell routes, redirects and transitions. Use when adding or changing a route, wiring tab shells, guarding access, customizing page transitions, or fixing go_router_builder generation errors."
 license: MIT
 ---
 

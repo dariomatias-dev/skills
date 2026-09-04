@@ -1,6 +1,6 @@
 ---
 name: flutter-data-layer
-description: Data layer for Flutter apps: repositories, data sources, local database with Drift, key-value storage, entities vs models, identifiers and error mapping. Use when persisting data, designing a repository, writing a database schema or migration, choosing where data belongs, or wrapping a platform SDK.
+description: "Data layer for Flutter apps: repositories, data sources, local database with Drift, key-value storage, entities vs models, identifiers, error mapping, and user-facing backup/export/import. Use when persisting data, designing a repository, writing a database schema or migration, choosing where data belongs, wrapping a platform SDK, or building a backup or restore flow."
 license: MIT
 ---
 
