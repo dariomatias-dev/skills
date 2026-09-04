@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "flutter",
-      "description": "Flutter development skills: feature-first architecture, MVVM, Riverpod, typed navigation, design system, data layer, testing, i18n and project tooling.",
+      "description": "Flutter development skills: feature-first architecture, MVVM, Riverpod, typed navigation, design system, data layer, background audio, performance, testing, i18n and project tooling.",
       "source": "./flutter",
       "category": "development"
     },

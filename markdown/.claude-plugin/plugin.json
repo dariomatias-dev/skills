@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "markdown",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Markdown document skills: repository readme structure, multi-language documentation, badges and section conventions.",
   "author": {
     "name": "Dário Matias",
