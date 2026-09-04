@@ -55,6 +55,30 @@ test('loads items', () async {
 
 Cover the failure path, not only the happy path: a ViewModel that never emits `AsyncError` in tests is untested.
 
+## Provider graph
+
+A unit test overrides one dependency and proves one ViewModel; it says nothing about whether the rest of the graph actually wires together, since the pieces it does not touch are never constructed. A wiring mistake (a provider reading the wrong instance, a circular `watch`, an argument in the wrong order) compiles, passes every unit test, and only surfaces on a device.
+
+Add one test that builds the real, production `ProviderContainer`, overriding only the leaf providers that need a platform resource (the database file location, the key-value store), and reads every other provider in the graph:
+
+```dart
+test('every provider resolves to its production implementation', () {
+  final container = ProviderContainer(
+    overrides: [
+      databaseProvider.overrideWithValue(openTestDatabase()),
+      keyValueStorageProvider.overrideWithValue(FakeKeyValueStorage()),
+    ],
+  );
+  addTearDown(container.dispose);
+
+  for (final provider in allProviders) {
+    expect(container.read(provider), isA<ExpectedProductionType>());
+  }
+});
+```
+
+This is not a substitute for feature tests. It catches one class of failure only: the object graph fails to construct, or constructs the wrong implementation, before a single feature test would ever notice.
+
 ## Widget tests
 
 - Pump the widget inside a `ProviderScope` with overrides, the app theme, and the localization delegates.
@@ -70,6 +94,7 @@ Cover the failure path, not only the happy path: a ViewModel that never emits `A
 - Cover both light and dark themes for anything with a color decision.
 - Freeze animations by pumping a fixed frame count, and load fonts explicitly so text renders identically in CI.
 - Add a golden only where the visual result carries real value; goldens for trivial layouts are pure maintenance cost.
+- Test the color tokens themselves for contrast (WCAG ratio) once, in the design system package. A single passing test on the token values catches a contrast regression that would otherwise require inspecting every component's golden by eye.
 
 ## Integration tests
 
