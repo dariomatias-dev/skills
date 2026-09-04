@@ -44,6 +44,11 @@ Delete comments that restate the code, commented-out code, and `TODO`s with no o
 - State derived from streams is one immutable snapshot object, not mutable fields scattered across the presentation layer.
 - Prefer `const` constructors on widgets everywhere the analyzer allows.
 
+## Determinism
+
+- Never use `Object.hashCode` (or the default `hashCode` on a class that does not override it) as a persisted or transmitted identifier. It is stable only within one process; a different run, isolate or Dart version can assign the same object a different value, so an id derived from it silently changes underneath already-stored data. Hash the actual bytes or fields with an explicit, documented algorithm (an FNV variant, `crypto`'s `md5`/`sha1`) when a deterministic derived key is needed.
+- The same rule applies to `identityHashCode` and to relying on `Set`/`Map` iteration order, both of which are implementation details, not a contract.
+
 ## Dependencies in code
 
 - Widgets and ViewModels never instantiate concrete dependencies; they receive them through providers.
