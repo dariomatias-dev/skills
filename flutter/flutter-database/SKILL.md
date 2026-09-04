@@ -23,6 +23,7 @@ core/database/
 - One DAO per aggregate, not one per screen. A DAO shaped by a screen is rewritten every time the UI changes.
 - Features never write SQL. They call repositories, which call DAOs.
 - The database is provided once, through a provider. Opening a second connection to the same file invites locking errors.
+- A raw, byte-for-byte backup of the file (a `VACUUM INTO`-style copy) and its restore path are covered by `flutter-data-layer`; restoring one replaces the provider's backing store, so the connection must be reopened rather than reused.
 
 ## Schema
 

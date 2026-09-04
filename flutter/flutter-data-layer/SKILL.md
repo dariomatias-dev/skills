@@ -97,6 +97,21 @@ When rebuilding an index from a source that can change underneath the app:
 
 Absent records must be visibly flagged in the UI and must never break flows that reference them.
 
+## Export and import
+
+A user-facing backup is a different concern from the database file, and most projects need both:
+
+| Form | Contains | Restore behavior |
+| --- | --- | --- |
+| Portable snapshot (JSON) | User-created data only: collections, favorites, history, preferences | Merged into existing data, keyed by each record's stable source key, never a raw replace |
+| Raw database backup | Everything, byte for byte (a `VACUUM INTO`-style copy) | Replaces the file outright; only meaningful when restoring onto the same schema version |
+
+Give the snapshot format its own version field (`formatVersion`, an int), independent of the app version. A restore path checks it explicitly and migrates or rejects an old snapshot; without the field, a schema change has no way to tell a stale export apart from a current one.
+
+Reference by the stable source key introduced above, not the record's internal id: an id is install-specific, and a snapshot restored onto a different install (or after a reinstall) must still resolve to the same logical record. A snapshot that stores internal ids breaks the moment it crosses installs.
+
+Restoring the raw database file is a destructive operation from the app's point of view: it replaces the connection's backing store outright, so the app must reopen it cleanly rather than continue reading through a connection that points at data it no longer matches.
+
 ## Error handling
 
 ```text
@@ -121,3 +136,4 @@ Cache derived expensive artifacts (thumbnails, extracted metadata, parsed docume
 - Business rules inside a repository implementation.
 - Storing JSON blobs in preferences to avoid writing a table.
 - Schema changes without a migration.
+- A backup format with no version field, or a restore that replaces data instead of merging by source key.
