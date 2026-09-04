@@ -21,6 +21,26 @@ The part worth writing down is the part a reader could not infer from the code: 
 
 A pin or a workaround with no recorded reason gets undone by whoever hits it next. Write the reason once, in this document or in a dedicated notes file it links to, and it stops being re-litigated.
 
+### Dependency notes
+
+Pins accumulate faster than any other kind of decision, and each one is invisible from the constraint alone: a version held back reads exactly like a version nobody has updated yet. Once a project has more than two or three, they deserve their own file (`dependencies.md`), linked from here.
+
+One entry per deliberate pin, each answering four things:
+
+| Field | Content |
+| --- | --- |
+| What | The package and the version it is held at |
+| Why | The constraint that forces it: a conflicting version range, an end-of-life release, a native toolchain ceiling, a generated file tied to a specific version |
+| What breaks | What happens if someone takes the update anyway |
+| What removes it | The upstream change that would let the pin go |
+
+Two places must agree with the file, and both drift silently when they do not:
+
+- The manifest itself carries a one-line comment at the pin, pointing here. A pin with no marker at the point of use is found only by whoever reads the notes first, which is nobody.
+- The dependency update automation excludes or groups exactly those packages by name. A pin explained here but not reflected there produces an update pull request that must be closed by hand, every week, forever.
+
+A pin whose reason no longer holds is deleted from the file and taken; the file is a list of live constraints, not a history.
+
 ## Keeping it truthful
 
 - Describe the system as it is, never as it is planned to be. A "not yet implemented" note belongs in an issue, not here.
