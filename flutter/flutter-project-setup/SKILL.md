@@ -64,6 +64,10 @@ updates:
 
 Dependabot is configuration, not a pipeline job: it opens pull requests, it does not run checks or gate a merge. One entry per `pubspec.yaml` in the project (root and every local package), plus one for the workflow files themselves. The gate that decides whether an update PR is safe to merge is the normal CI run, covered by `flutter-ci`.
 
+Renovate is the alternative, configured through `renovate.json` instead of a GitHub-specific file; pick either, not both. Its advantage over Dependabot here is `packageRules`: a project with dependencies pinned for a documented reason (an analyzer version conflict, an EOL package, a native toolchain ceiling) can disable or group updates for exactly those packages by name, instead of relying on someone noticing the pin and closing the PR by hand every time it recurs.
+
+Whichever tool is used, cross-reference it with the reasoning: a pin justified in a dependency-notes document (`markdown-architecture-doc`) but not reflected in the automation config still generates a pull request nobody should merge, over and over.
+
 ## Local packages
 
 The design system (and any other reusable module) is a local package under `packages/`, wired as a path dependency:
@@ -128,6 +132,20 @@ assets/
 ```
 
 Declare assets in `pubspec.yaml` and reference them through generated accessors rather than string paths. Fonts used by the design system are declared in that package's `pubspec.yaml`, not in the app root.
+
+## Platform manifests
+
+Every OS-level capability the app uses (camera, location, background audio, notifications, media library access) needs a matching declaration on each platform, or the feature fails at runtime with no compile-time warning:
+
+| Platform | File | Declares |
+| --- | --- | --- |
+| Android | `android/app/src/main/AndroidManifest.xml` | Permissions, foreground service types, exported components |
+| iOS | `ios/Runner/Info.plist` | Usage description strings (one per permission, shown to the user), background modes |
+
+- One permission, one line, one reason: each entry should trace back to a single feature. A permission with no corresponding runtime request in the Dart code raises the app's risk profile for no functional benefit, and app store review can reject it on that basis alone.
+- iOS usage description strings are user-facing copy, not internal documentation: write what the person granting the permission actually needs to know, and localize them the same way any other user-facing string is localized.
+- A build tool constraint that lives in the native project (a `compileSdk` floor forced by a plugin, a minimum OS version) belongs in a comment in that native file, cross-referencing the CI workflow env var or variable that must move with it. The two drift silently otherwise: a plugin bump raises the floor, the native file is updated, and the pipeline keeps building against the old one until a version-mismatch failure with no obvious cause.
+- A capability that keeps running while the app is backgrounded (audio playback, location tracking, a long download) needs the corresponding platform declaration (a foreground service type on Android, a background mode on iOS) in addition to the runtime permission; the permission alone does not keep the process alive.
 
 ## Repository files
 
