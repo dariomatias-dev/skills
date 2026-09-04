@@ -31,6 +31,8 @@ The repository root is a plugin marketplace. Each technology folder is one insta
 
 The skill folder name matches the `name` in the frontmatter and carries the technology prefix, so a listing of many skills stays readable and two technologies can cover the same topic without colliding.
 
+Repository-wide tooling sits outside any technology folder: `scripts/` holds the local verification gate, `.github/workflows/` runs it in CI, and `.githooks/` holds the commit message hook. See [Local Setup](#local-setup) and [Commit Convention](#commit-convention).
+
 ## Writing a Skill
 
 ### Frontmatter
@@ -118,6 +120,14 @@ When you are done, point the marketplace back at the published repository:
 ```bash
 claude plugin marketplace remove dariomatias-dev
 claude plugin marketplace add dariomatias-dev/skills
+```
+
+### The local gate
+
+`./scripts/verify.sh` runs everything CI runs: marketplace and plugin manifest consistency, every `SKILL.md` against the Agent Skills spec, README translation structure, and local markdown links. Run it before opening a pull request; a check that only exists in CI is found after the push, by whoever is waiting on the review.
+
+```bash
+./scripts/verify.sh
 ```
 
 ## Commit Convention
