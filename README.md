@@ -137,6 +137,23 @@ Restart Claude Code. The twenty-two skills are loaded automatically and appear u
 
 Only the skill descriptions remain in context permanently, roughly 70 to 90 tokens each. The body of a skill is read only when the agent determines that it applies to the current task.
 
+### Installing with `npx skills`
+
+The [`skills`](https://skills.sh) CLI installs straight from this repository, into Claude Code or any other supported agent, with no marketplace registration.
+
+```bash
+# Interactive: choose the skills and the target agents
+npx skills add dariomatias-dev/skills
+
+# A single skill, for Claude Code, in the current project
+npx skills add dariomatias-dev/skills --skill flutter-architecture -a claude-code
+
+# Every skill of the repository, available in all projects
+npx skills add dariomatias-dev/skills --skill '*' -g
+```
+
+Skills installed this way are plain copies: they appear as `flutter-architecture` instead of `flutter:flutter-architecture`, and they are updated with `npx skills update`.
+
 ### Installing a single skill
 
 To install individual skills rather than an entire technology, create a symbolic link for each one required:
